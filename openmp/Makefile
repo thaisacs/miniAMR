@@ -1,7 +1,8 @@
-CC   = cc
-LD   = cc
+CC   = mpicc
+LD   = mpicc
 CPPFLAGS = -I.
-CFLAGS = -O3 -fopenmp
+#CFLAGS = -O3 -fopenmp
+CFLAGS = -O3
 LDFLAGS =
 LDLIBS = -lm -lgomp
 
@@ -12,7 +13,7 @@ OBJS = block.o check_sum.o comm_block.o comm.o comm_parent.o comm_refine.o \
        rcb.o refine.o stencil.o util.o
 
 $(EXEC): $(OBJS)
-	$(LD) $(LDFLAGS) -o $@ $(OBJS) $(LDLIBS)
+	$(LD) $(LDFLAGS) -o $@ $(OBJS) $(LDLIBS) ../../kernel_stats/kernel_stats.o
 
 .c.o:
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $<

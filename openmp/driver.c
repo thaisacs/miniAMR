@@ -33,6 +33,9 @@
 #include "timer.h"
 #include "proto.h"
 
+extern void begin_timestep_();
+extern void end_timestep_();
+
 // Main driver for program.
 void driver(void)
 {
@@ -61,6 +64,7 @@ void driver(void)
 
    if (use_time) delta = calc_time_step();
    for (sim_time = 0.0, done = comm_stage =calc_stage=0, ts = 1; !done; ts++) {
+      begin_timestep_();
       for (stage=0; stage < stages_per_ts; stage++,comm_stage++,calc_stage++) {
          total_blocks += global_active;
          if (global_active < nb_min)
@@ -128,6 +132,7 @@ void driver(void)
       } else
          if (ts >= num_tsteps)
             done = 1;
+      end_timestep_();
    }
 
    end_time = sim_time;

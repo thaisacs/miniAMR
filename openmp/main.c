@@ -34,12 +34,16 @@
 #include "timer.h"
 #include "proto.h"
 
+extern void init_timestep_();
+extern void exit_timestep_();
+
 int main(int argc, char** argv)
 {
    int i, ierr, object_num;
    int params[33];
    double *objs;
 #include "param.h"
+   init_timestep_();
 
    ierr = MPI_Init(&argc, &argv);
    ierr = MPI_Comm_set_errhandler(MPI_COMM_WORLD, MPI_ERRORS_ARE_FATAL);
@@ -287,6 +291,7 @@ int main(int argc, char** argv)
 
    deallocate();
 
+   exit_timestep_();
    MPI_Finalize();
 
    exit(0);
