@@ -13,7 +13,7 @@ OBJS = block.o check_sum.o comm_block.o comm.o comm_parent.o comm_refine.o \
        rcb.o refine.o stencil.o util.o
 
 $(EXEC): $(OBJS)
-	$(LD) $(LDFLAGS) -o $@ $(OBJS) $(LDLIBS) ../../../utils/kernel_stats.o
+	$(LD) $(LDFLAGS) -o $@ $(OBJS) $(LDLIBS) ../../../utils/obj/*.o
 
 .c.o:
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $<
