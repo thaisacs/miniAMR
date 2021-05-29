@@ -35,6 +35,7 @@
 
 extern void begin_timestep_();
 extern void end_timestep_();
+extern void after_timestep_();
 
 // Main driver for program.
 void driver(void)
@@ -134,6 +135,7 @@ void driver(void)
             done = 1;
       end_timestep_();
    }
+   after_timestep_();
 
    end_time = sim_time;
    num_tsteps = ts - 1;
